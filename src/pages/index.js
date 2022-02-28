@@ -1,14 +1,15 @@
-import { Button, ThemeProvider } from "@mui/material";
-import { LightTheme } from "../shared/themes";
+import { Button } from "@mui/material";
+
+import { ThemeContext, useAppThemeContext } from "../shared/contexts";
 
 const Home = () => {
+  const {toggleTheme} = useAppThemeContext(ThemeContext);
+
   return (
-    <ThemeProvider theme={LightTheme}>
-      <Button variant="contained" color="primary">
+       <Button variant="contained" color="primary" onClick={toggleTheme}>
         Teste
       </Button>
-    </ThemeProvider>
-  )
-};
+  );
+}
 
 export default Home;
