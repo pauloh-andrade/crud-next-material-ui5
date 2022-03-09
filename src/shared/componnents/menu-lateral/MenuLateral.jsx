@@ -1,12 +1,18 @@
-import { Avatar, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, useTheme} from "@mui/material";
+import { Avatar, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme} from "@mui/material";
 import { Home } from "@mui/icons-material"
 import { Box } from "@mui/system";
+import { useDrawerContext } from "../../contexts";
 
 export const MenuLateral = ({children}) =>{
     //utilizando useTheme para trabalhar com a unidade de medida spacing(num*4=?px)
     const theme = useTheme();
+    const smDown = useMediaQuery(theme.breakpoints.down("sm"));
+
+    const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
     /*
-    *   Drawer -> Componente de menu Lateral
+    *   Drawer -> Componente de menu lateral 
+    *       -open: recebe true ou false para definir se o menu será exibido
+    *       -onClose: executa função que alterna entre true ou false quando clicado fora do menu
     *   Box -> Componente para encapsular, como uma div
     *   Avatar -> Componente para perfil do usuário
     *   Divider -> Componente para a criação de uma linha divisora
@@ -14,8 +20,8 @@ export const MenuLateral = ({children}) =>{
     *   ListItem -> Componente de item da lista ListItem(Button, Text, Icon)
     */
     return(
-        <>
-            <Drawer open={true} variant="permanent">
+        <>  
+            <Drawer open={isDrawerOpen} variant={smDown? "temporary": "permanent"} onClose={toggleDrawerOpen}>
                 <Box width={theme.spacing(28)} height="100%" display="flex" flexDirection="column">
                     <Box width="100%" height={theme.spacing(20)} display="flex" alignItems="center" justifyContent="center">
                         <Avatar 
@@ -37,7 +43,7 @@ export const MenuLateral = ({children}) =>{
                     </Box>
                 </Box>
             </Drawer>
-            <Box height="100vh" marginLeft={theme.spacing(28)}>
+            <Box height="100vh" marginLeft={smDown? 0 : theme.spacing(28)}>
                 {children}
             </Box>
         </>

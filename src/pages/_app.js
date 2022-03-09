@@ -1,10 +1,12 @@
-import { AppThemeProvider } from "../shared/contexts";
+import { AppThemeProvider, DrawerProvider } from "../shared/contexts";
 import "./globals.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
     <AppThemeProvider>
-      <Component {...pageProps} />
+      <DrawerProvider>
+        <Component {...pageProps} />
+      </DrawerProvider>
     </AppThemeProvider>
   )
 };
