@@ -1,6 +1,6 @@
 import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme} from "@mui/material";
 import { Box } from "@mui/system";
-import { useDrawerContext } from "../../contexts";
+import { useAppThemeContext, useDrawerContext } from "../../contexts";
 import { useRouter } from "next/router";
 
 const ListItemLink = ({to, icon, label, onClick }) =>{
@@ -17,7 +17,7 @@ const ListItemLink = ({to, icon, label, onClick }) =>{
             <ListItemIcon>
                 <Icon>{icon}</Icon>
             </ListItemIcon>
-        <ListItemText primary={label}/>
+            <ListItemText primary={label}/>
         </ListItemButton>
     );
 }
@@ -28,6 +28,7 @@ export const MenuLateral = ({children}) =>{
     const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
     const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
+    const { toggleTheme } = useAppThemeContext();
     /*
     *   Drawer -> Componente de menu lateral 
     *       -open: recebe true ou false para definir se o menu será exibido
@@ -62,6 +63,14 @@ export const MenuLateral = ({children}) =>{
                             />
                             ))}
                         </List>
+                    </Box>
+                    <Box>
+                        <ListItemButton onClick={toggleTheme}>
+                            <ListItemIcon>
+                                <Icon>dark_mode</Icon>
+                            </ListItemIcon>
+                            <ListItemText primary="Alternar tema"/>
+                        </ListItemButton>
                     </Box>
                 </Box>
             </Drawer>
