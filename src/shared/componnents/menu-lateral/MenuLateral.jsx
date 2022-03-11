@@ -1,14 +1,33 @@
-import { Avatar, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme} from "@mui/material";
-import { Home } from "@mui/icons-material"
+import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme} from "@mui/material";
 import { Box } from "@mui/system";
 import { useDrawerContext } from "../../contexts";
+import { useRouter } from "next/router";
+
+const ListItemLink = ({to, icon, label, onClick }) =>{
+    const router = useRouter();
+    const selected = router.pathname == to? true : false;
+    const handleClick = () =>{
+        router.push(to);
+        //se onClick não for nulo, execta a função.
+        onClick?.();
+    };
+
+    return(
+        <ListItemButton selected={selected} onClick={handleClick}>
+            <ListItemIcon>
+                <Icon>{icon}</Icon>
+            </ListItemIcon>
+        <ListItemText primary={label}/>
+        </ListItemButton>
+    );
+}
 
 export const MenuLateral = ({children}) =>{
     //utilizando useTheme para trabalhar com a unidade de medida spacing(num*4=?px)
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
+    const { isDrawerOpen, toggleDrawerOpen, drawerOptions } = useDrawerContext();
     /*
     *   Drawer -> Componente de menu lateral 
     *       -open: recebe true ou false para definir se o menu será exibido
@@ -33,12 +52,15 @@ export const MenuLateral = ({children}) =>{
                     <Divider />
                     <Box flex={1}>
                         <List component="nav">
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Home />
-                                </ListItemIcon>
-                                <ListItemText primary="Página Inicial"/>
-                            </ListItemButton>
+                            {drawerOptions.map(drawerOptions =>(
+                                <ListItemLink 
+                                key={drawerOptions.path}
+                                icon={drawerOptions.icon}
+                                to={drawerOptions.path}
+                                label={drawerOptions.label}
+                                onClick={smDown? toggleDrawerOpen : undefined}
+                            />
+                            ))}
                         </List>
                     </Box>
                 </Box>
