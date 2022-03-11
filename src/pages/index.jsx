@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { MenuLateral } from "../shared/componnents";
 
 import { useDrawerContext } from "../shared/contexts";
+import Dashboard from "./dashboard/Dashboard";
 
 const Home = () => {
-  const {toggleDrawerOpen, setDrawerOptions } = useDrawerContext();
+  const {setDrawerOptions } = useDrawerContext();
 
   useEffect(()=>{
     setDrawerOptions([
@@ -25,9 +26,9 @@ const Home = () => {
   return (
     <>
       <MenuLateral>
-        <Button variant="contained" color="primary" onClick={toggleDrawerOpen}>
-          Toggle Drawer
-        </Button>
+        <Dashboard>
+
+        </Dashboard>
       </MenuLateral>
     </>
   );
