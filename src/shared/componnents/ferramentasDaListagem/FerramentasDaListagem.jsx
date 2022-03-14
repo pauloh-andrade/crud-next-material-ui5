@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Paper, useTheme, Icon } from "@mui/material";
 
-export const BarraDeFerramentas = ({
+export const FerramentasDaListagem = ({
     textoBusca = "", 
     mostrarInputBusca = false, 
     aoMudarTextoDeBusca, 
@@ -13,7 +13,7 @@ export const BarraDeFerramentas = ({
     //podemos herdar propriedadas de outros coponentes a partir do component
     return (
         <Box 
-            heigh={theme.spacing(5)} 
+            height={theme.spacing(5)} 
             gap={1}
             marginX={1} 
             padding={1} 
@@ -33,14 +33,14 @@ export const BarraDeFerramentas = ({
             <Box flex={1} display="flex" justifyContent="end">
                 {mostrarBotaoNovo && (
                     <Button 
-                    color="primary" 
-                    variant="contained" 
-                    endIcon={<Icon>add</Icon>} 
-                    disableElevation
-                    onClick={aoClicarEmNovo}
-                    >
-                    {textoBotaoNovo}
-                </Button>
+                        color="primary" 
+                        variant="contained" 
+                        endIcon={<Icon>add</Icon>} 
+                        disableElevation
+                        onClick={aoClicarEmNovo}
+                        >
+                        {textoBotaoNovo}
+                    </Button>
                 )}
             </Box>
         </Box> 

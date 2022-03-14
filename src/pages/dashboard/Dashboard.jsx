@@ -1,4 +1,4 @@
-import { BarraDeFerramentas } from "../../shared/componnents";
+import { FerramentasDeDetalhe } from "../../shared/componnents";
 import LayoutBase from "../../shared/layout/LayoutBase";
 
 const Dashboard = () =>{
@@ -6,7 +6,7 @@ const Dashboard = () =>{
         <LayoutBase 
             titulo="Página Inicial" 
             barraDeFerramentas={(
-                <BarraDeFerramentas mostrarInputBusca textoBotaoNovo="Nova"/>
+                <FerramentasDeDetalhe/>
             )}>
             testeando
         </LayoutBase>
