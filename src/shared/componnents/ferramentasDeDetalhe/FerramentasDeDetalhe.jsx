@@ -1,10 +1,10 @@
-import { Box, useTheme, Paper, Button, Icon, Divider, Skeleton } from "@mui/material";
+import { Box, useTheme, Paper, Button, Icon, Divider, Skeleton, Typography, useMediaQuery } from "@mui/material";
 
 export const FerramentasDeDetalhe = ({
     textoBotaoNovo = "Novo",
     mostrarBotaoNovo = true,
     mostrarBotaoApagar= true,
-    mostarBotaoSalvar= true,
+    mostrarBotaoSalvar= true,
     mostrarBotaoSalvarEVoltar = false,
     mostrarBotaoVoltar = true,
 
@@ -21,6 +21,9 @@ export const FerramentasDeDetalhe = ({
     aoClicarEmVoltar
 }) =>{
     const theme = useTheme();
+    const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
+    const mdDown = useMediaQuery(theme.breakpoints.down("md"));
+
     return(
         <Box 
         height={theme.spacing(5)} 
@@ -32,30 +35,34 @@ export const FerramentasDeDetalhe = ({
         alignItems="center"
         component={Paper}
         >
-            {(mostarBotaoSalvar && !mostarBotaoSalvarCarregando) && (
+            {(mostrarBotaoSalvar && !mostarBotaoSalvarCarregando) && (
                 <Button 
                     color="primary" 
                     variant="contained" 
                     startIcon={<Icon>save</Icon>} 
                     disableElevation
                     >
-                    Salvar
+                    <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+                        Salvar
+                    </Typography>
                 </Button>
             )}
             {mostarBotaoSalvarCarregando && (
                 <Skeleton width={110} height={60}/>
             )}
-            {(mostrarBotaoSalvarEVoltar && !mostrarBotaoSalvarEVoltar) && (
+            {(mostrarBotaoSalvarEVoltar && !mostrarBotaoSalvarEVoltarCarregando && !smDown && !mdDown) && (
                 <Button 
                     color="primary" 
                     variant="outlined" 
                     startIcon={<Icon>save</Icon>} 
                     disableElevation
                     >
-                    Salvar e voltar
+                    <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+                        Salvar e voltar
+                    </Typography>
                 </Button>
             )}
-            {mostrarBotaoSalvarEVoltarCarregando && (
+            {(mostrarBotaoSalvarEVoltarCarregando  && !smDown && !mdDown) && (
                 <Skeleton width={170} height={60}/>
             )}
             {(mostrarBotaoApagar && !mostrarBotaoApagarCarregando) && (
@@ -65,26 +72,33 @@ export const FerramentasDeDetalhe = ({
                     startIcon={<Icon>delete</Icon>} 
                     disableElevation
                     >
-                    Apagar
+                    <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+                        Apagar
+                    </Typography>
                 </Button>
             )}
             {mostrarBotaoApagarCarregando && (
                 <Skeleton width={110} height={60}/>
             )}
-            {(mostrarBotaoNovo && !mostrarBotaoNovoCarregando) && (
+            {(mostrarBotaoNovo && !mostrarBotaoNovoCarregando && !smDown) && (
                 <Button 
                     color="primary" 
                     variant="outlined" 
                     startIcon={<Icon>add</Icon>} 
                     disableElevation
                     >
-                    {textoBotaoNovo}
+                     <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+                        {textoBotaoNovo}
+                    </Typography>
                 </Button>
             )}
-            {mostrarBotaoNovoCarregando && (
+            {(mostrarBotaoNovoCarregando && !smDown) &&  (
                 <Skeleton width={95} height={60}/>
             )}
-            <Divider variant="middle" orientation="vertical" />
+            {mostrarBotaoVoltar && (mostrarBotaoNovo || mostrarBotaoApagar || mostrarBotaoSalvar || mostrarBotaoSalvarEVoltar) && (
+                <Divider variant="middle" orientation="vertical" />
+            )}
+            
             {(mostrarBotaoVoltar && !mostrarBotaoVoltarCarregando)&& (
                 <Button 
                     color="primary" 
@@ -92,7 +106,9 @@ export const FerramentasDeDetalhe = ({
                     startIcon={<Icon>arrow_back</Icon>} 
                     disableElevation
                     >
-                    voltar
+                    <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+                        voltar
+                    </Typography>
                 </Button>
             )}
             {mostrarBotaoVoltarCarregando && (

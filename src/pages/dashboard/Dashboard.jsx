@@ -6,7 +6,7 @@ const Dashboard = () =>{
         <LayoutBase 
             titulo="Página Inicial" 
             barraDeFerramentas={(
-                <FerramentasDeDetalhe mostrarBotaoSalvarEVoltar mostrarBotaoSalvarEVoltarCarregando/>
+                <FerramentasDeDetalhe mostrarBotaoSalvarEVoltar/>
             )}>
             testeando
         </LayoutBase>
