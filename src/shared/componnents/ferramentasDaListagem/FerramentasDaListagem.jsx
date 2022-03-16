@@ -1,5 +1,7 @@
 import { Box, Button, TextField, Paper, useTheme, Icon } from "@mui/material";
 
+import {Environment} from "../../environment"
+
 export const FerramentasDaListagem = ({
     textoBusca = "", 
     mostrarInputBusca = false, 
@@ -25,7 +27,7 @@ export const FerramentasDaListagem = ({
             {mostrarInputBusca && (
                 <TextField  
                 size="small" 
-                placeholder="Pesquisar..."
+                placeholder={Environment.INPUT_DE_BUSCA}
                 onChange={(e)=> aoMudarTextoDeBusca?.(e.target.value)}
                 value={textoBusca}
                 />
