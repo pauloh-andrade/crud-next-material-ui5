@@ -1,16 +1,12 @@
-import { FerramentasDeDetalhe } from "../../shared/componnents";
-import LayoutBase from "../../shared/layout/LayoutBase";
+import { FerramentasDeDetalhe } from '../../componnents';
+import LayoutBase from '../../layout/LayoutBase';
 
-const Dashboard = () =>{
-    return(
-        <LayoutBase 
-            titulo="Página Inicial" 
-            barraDeFerramentas={(
-                <FerramentasDeDetalhe mostrarBotaoSalvarEVoltar/>
-            )}>
-            testeando
-        </LayoutBase>
-    );
+const Dashboard = () => {
+	return (
+		<LayoutBase titulo="Página Inicial" barraDeFerramentas={<FerramentasDeDetalhe mostrarBotaoSalvarEVoltar />}>
+			testeando
+		</LayoutBase>
+	);
 };
 
 export default Dashboard;

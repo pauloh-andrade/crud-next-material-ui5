@@ -1,14 +1,17 @@
-import { AppThemeProvider, DrawerProvider } from "../shared/contexts";
-import "./globals.css";
+import { MenuLateral } from '../componnents';
+import { AppThemeProvider, DrawerProvider } from '../contexts';
+import './globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
-  return (
-    <AppThemeProvider>
-      <DrawerProvider>
-        <Component {...pageProps} />
-      </DrawerProvider>
-    </AppThemeProvider>
-  )
+	return (
+		<AppThemeProvider>
+			<DrawerProvider>
+				<MenuLateral>
+					<Component {...pageProps} />
+				</MenuLateral>
+			</DrawerProvider>
+		</AppThemeProvider>
+	);
 };
 
 export default MyApp;
