@@ -9,6 +9,7 @@ export const FerramentasDaListagem = ({
 	aoClicarEmNovo,
 	textoBotaoNovo = 'Novo',
 	mostrarBotaoNovo = true,
+	params,
 }) => {
 	const theme = useTheme();
 
@@ -26,7 +27,7 @@ export const FerramentasDaListagem = ({
 				<TextField
 					size="small"
 					placeholder={Environment.INPUT_DE_BUSCA}
-					onChange={e => aoMudarTextoDeBusca?.(e.target.value)}
+					onChange={e => aoMudarTextoDeBusca?.({ ...params, busca: e.target.value })}
 					value={textoBusca}
 				/>
 			)}
