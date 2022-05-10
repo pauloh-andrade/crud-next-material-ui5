@@ -2,20 +2,29 @@ import { useRouter } from 'next/router';
 
 import { useEffect, useMemo, useState } from 'react';
 import { FerramentasDaListagem } from '../../componnents';
+import { PessoaService } from '../../services/api/pessoas/PessoasService';
 import LayoutBase from '../../layout/LayoutBase';
 
-const ListagemDeCidade = () => {
+const ListagemDePessoas = () => {
 	const router = useRouter();
 
-	// const [params, setParams] = useState();
-
 	const definirParametros = texto => {
-		router.push({ pathname: '/cidades', query: texto }, undefined, {
+		router.push({ pathname: '/pessoas', query: texto }, undefined, {
 			shallow: true,
 		});
 	};
 	const busca = useMemo(() => {
 		return router.query.busca;
+	});
+
+	useEffect(() => {
+		PessoaService.getAll(1, router.query.busca).then(result => {
+			if (result instanceof Error) {
+				alert(result.message);
+			} else {
+				console.log(result);
+			}
+		});
 	});
 
 	return (
@@ -28,7 +37,6 @@ const ListagemDeCidade = () => {
 					aoMudarTextoDeBusca={texto => definirParametros(texto)}
 					textoBotaoNovo="nova"
 					mostrarBotaoSalvarEVoltar
-					params={params}
 				/>
 			}>
 			testeando
@@ -36,4 +44,4 @@ const ListagemDeCidade = () => {
 	);
 };
 
-export default ListagemDeCidade;
+export default ListagemDePessoas;

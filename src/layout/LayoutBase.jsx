@@ -20,9 +20,9 @@ const LayoutBase = ({ children, titulo, barraDeFerramentas }) => {
 				label: 'Página inicial  ',
 			},
 			{
-				icon: 'apartment',
-				path: '/cidades',
-				label: 'Cidades',
+				icon: 'people',
+				path: '/pessoas',
+				label: 'Pessoas',
 			},
 		]);
 	}, []);
