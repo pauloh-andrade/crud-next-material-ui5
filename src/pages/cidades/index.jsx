@@ -7,16 +7,16 @@ import LayoutBase from '../../layout/LayoutBase';
 const ListagemDeCidade = () => {
 	const router = useRouter();
 
-	const [params, setParams] = useState({
-		busca: router.query.busca,
-		tipo: router.query.tipo,
-	});
+	// const [params, setParams] = useState();
 
-	useEffect(() => {
-		router.push({ pathname: '/cidades', query: params.busca ? params : router.query }, undefined, {
+	const definirParametros = texto => {
+		router.push({ pathname: '/cidades', query: texto }, undefined, {
 			shallow: true,
 		});
-	}, [router.isReady, params]);
+	};
+	const busca = useMemo(() => {
+		return router.query.busca;
+	});
 
 	return (
 		<LayoutBase
@@ -24,8 +24,8 @@ const ListagemDeCidade = () => {
 			barraDeFerramentas={
 				<FerramentasDaListagem
 					mostrarInputBusca
-					textoBusca={params.busca ? params.busca : router.query.busca}
-					aoMudarTextoDeBusca={setParams}
+					textoBusca={busca}
+					aoMudarTextoDeBusca={texto => definirParametros(texto)}
 					textoBotaoNovo="nova"
 					mostrarBotaoSalvarEVoltar
 					params={params}

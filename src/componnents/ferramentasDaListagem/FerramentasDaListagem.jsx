@@ -27,7 +27,7 @@ export const FerramentasDaListagem = ({
 				<TextField
 					size="small"
 					placeholder={Environment.INPUT_DE_BUSCA}
-					onChange={e => aoMudarTextoDeBusca?.({ ...params, busca: e.target.value })}
+					onChange={e => aoMudarTextoDeBusca?.({ busca: e.target.value })}
 					value={textoBusca}
 				/>
 			)}
