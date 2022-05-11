@@ -3,9 +3,20 @@ import { useRouter } from 'next/router';
 
 import { PessoaService } from '../../services/api/pessoas/PessoasService';
 import { FerramentasDaListagem } from '../../componnents';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import LayoutBase from '../../layout/LayoutBase';
+import { Environment } from '../../environment';
 import { UseDebounce } from '../../hooks';
+import {
+	LinearProgress,
+	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableFooter,
+	TableHead,
+	TableRow,
+} from '@mui/material';
 
 const ListagemDePessoas = () => {
 	const router = useRouter();
@@ -70,6 +81,17 @@ const ListagemDePessoas = () => {
 							</TableRow>
 						))}
 					</TableBody>
+
+					<TableFooter>
+						{totalCount == 0 && !isLoading && <captions>{Environment.LISTAGEM_VAZIA}</captions>}
+						{isLoading && (
+							<TableRow>
+								<TableCell colSpan={3}>
+									<LinearProgress variant="indeterminate" />
+								</TableCell>
+							</TableRow>
+						)}
+					</TableFooter>
 				</Table>
 			</TableContainer>
 		</LayoutBase>
