@@ -100,9 +100,12 @@ const ListagemDePessoas = () => {
 							<TableRow>
 								<TableCell colSpan={3}>
 									<Pagination
-										page={pagina}
+										page={parseInt(pagina)}
 										count={Math.ceil(totalCount / Environment.LIMITE_DE_LINHAS)}
-										onChange={(_, newPage) => definirParametros({ ...router.query, pagina: newPage })}
+										onChange={(e, newPage) => {
+											definirParametros({ ...router.query, pagina: newPage });
+											console.log(newPage);
+										}}
 									/>
 								</TableCell>
 							</TableRow>
