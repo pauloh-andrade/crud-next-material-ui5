@@ -7,6 +7,8 @@ import LayoutBase from '../../layout/LayoutBase';
 import { Environment } from '../../environment';
 import { UseDebounce } from '../../hooks';
 import {
+	Icon,
+	IconButton,
 	LinearProgress,
 	Pagination,
 	Paper,
@@ -56,6 +58,21 @@ const ListagemDePessoas = () => {
 		});
 	}, [busca, pagina]);
 
+	const handleClickDelete = id => {
+		if (confirm('Tem certeza que deseja apagar?')) {
+			PessoaService.deleteById(id).then(result => {
+				if (result instanceof Error) {
+					alert(result.message);
+				} else {
+					setRows(oldRows => {
+						return [...oldRows.filter(oldRow => oldRow.id !== id)];
+					});
+					alert('registro apagado com sucesso');
+				}
+			});
+		}
+	};
+
 	return (
 		<LayoutBase
 			titulo="Controle de cidades"
@@ -80,7 +97,14 @@ const ListagemDePessoas = () => {
 					<TableBody>
 						{rows.map(row => (
 							<TableRow key={row.id}>
-								<TableCell>Ações</TableCell>
+								<TableCell>
+									<IconButton size="small" onClick={() => handleClickDelete(row.id)}>
+										<Icon>delete</Icon>
+									</IconButton>
+									<IconButton size="small" onClick={() => router.push({ pathname: `/pessoas/detalhe/${row.id}` })}>
+										<Icon>edit</Icon>
+									</IconButton>
+								</TableCell>
 								<TableCell>{row.nomeCompleto}</TableCell>
 								<TableCell>{row.email}</TableCell>
 							</TableRow>
