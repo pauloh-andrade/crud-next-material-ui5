@@ -8,6 +8,7 @@ import { Environment } from '../../environment';
 import { UseDebounce } from '../../hooks';
 import {
 	LinearProgress,
+	Pagination,
 	Paper,
 	Table,
 	TableBody,
@@ -35,10 +36,14 @@ const ListagemDePessoas = () => {
 		return router.query.busca;
 	}, [router.query]);
 
+	const pagina = useMemo(() => {
+		return router.query.pagina || 1;
+	}, [router.query.pagina]);
+
 	useEffect(() => {
 		setIsLoading(true);
 		debounce(() => {
-			PessoaService.getAll(1, router.query.busca).then(result => {
+			PessoaService.getAll(pagina, router.query.busca).then(result => {
 				setIsLoading(false);
 				if (result instanceof Error) {
 					alert(result.message);
@@ -49,7 +54,7 @@ const ListagemDePessoas = () => {
 				}
 			});
 		});
-	}, [busca]);
+	}, [busca, pagina]);
 
 	return (
 		<LayoutBase
@@ -88,6 +93,17 @@ const ListagemDePessoas = () => {
 							<TableRow>
 								<TableCell colSpan={3}>
 									<LinearProgress variant="indeterminate" />
+								</TableCell>
+							</TableRow>
+						)}
+						{totalCount > 0 && totalCount > Environment.LIMITE_DE_LINHAS && (
+							<TableRow>
+								<TableCell colSpan={3}>
+									<Pagination
+										page={pagina}
+										count={Math.ceil(totalCount / Environment.LIMITE_DE_LINHAS)}
+										onChange={(_, newPage) => definirParametros({ ...router.query, pagina: newPage })}
+									/>
 								</TableCell>
 							</TableRow>
 						)}
