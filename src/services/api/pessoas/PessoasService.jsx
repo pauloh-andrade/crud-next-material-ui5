@@ -17,11 +17,20 @@ const getAll = async (page = 1, filter = '') => {
 		return new Error(error.message || 'Erro ao listar os registros.');
 	}
 };
+
 const getById = async id => {
 	try {
-		const urlRelativa = `/pessoas/${id}`;
-		const { data } = await Api.get(urlRelativa);
-	} catch (erros) {}
+		const { data } = await Api.get(`/pessoas/${id}`);
+
+		if (data) {
+			return data;
+		}
+
+		return new Error('Erro ao consultar o registro.');
+	} catch (error) {
+		console.error(error);
+		return new Error(error.message || 'Erro ao consultar o registro.');
+	}
 };
 const create = async () => {};
 const updateById = async () => {};

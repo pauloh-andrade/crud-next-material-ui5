@@ -30,7 +30,7 @@ const ListagemDePessoas = () => {
 	const [isLoading, setIsLoading] = useState([]);
 
 	const definirParametros = texto => {
-		router.push({ pathname: '/pessoas', query: texto }, undefined, {
+		router.replace({ pathname: '/pessoa', query: texto }, undefined, {
 			shallow: true,
 		});
 	};
@@ -80,9 +80,10 @@ const ListagemDePessoas = () => {
 				<FerramentasDaListagem
 					mostrarInputBusca
 					textoBusca={busca}
-					aoMudarTextoDeBusca={texto => definirParametros(texto)}
 					textoBotaoNovo="nova"
 					mostrarBotaoSalvarEVoltar
+					aoMudarTextoDeBusca={texto => definirParametros(texto)}
+					aoClicarEmNovo={() => router.push('pessoas/detalhe/nova')}
 				/>
 			}>
 			<TableContainer component={Paper} variant="outlined" sx={{ m: 1, width: 'auto' }}>
@@ -101,7 +102,7 @@ const ListagemDePessoas = () => {
 									<IconButton size="small" onClick={() => handleClickDelete(row.id)}>
 										<Icon>delete</Icon>
 									</IconButton>
-									<IconButton size="small" onClick={() => router.push({ pathname: `/pessoas/detalhe/${row.id}` })}>
+									<IconButton size="small" onClick={() => router.push({ pathname: `/pessoa/${row.id}` })}>
 										<Icon>edit</Icon>
 									</IconButton>
 								</TableCell>

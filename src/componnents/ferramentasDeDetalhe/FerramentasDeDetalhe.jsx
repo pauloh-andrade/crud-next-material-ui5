@@ -5,7 +5,7 @@ export const FerramentasDeDetalhe = ({
 	mostrarBotaoNovo = true,
 	mostrarBotaoApagar = true,
 	mostrarBotaoSalvar = true,
-	mostrarBotaoSalvarEVoltar = false,
+	mostrarBotaoSalvarEVoltar = true,
 	mostrarBotaoVoltar = true,
 
 	mostrarBotaoNovoCarregando = false,
@@ -35,7 +35,12 @@ export const FerramentasDeDetalhe = ({
 			alignItems="center"
 			component={Paper}>
 			{mostrarBotaoSalvar && !mostarBotaoSalvarCarregando && (
-				<Button color="primary" variant="contained" startIcon={<Icon>save</Icon>} disableElevation>
+				<Button
+					color="primary"
+					variant="contained"
+					startIcon={<Icon>save</Icon>}
+					onClick={aoClicarEmSalvar}
+					disableElevation>
 					<Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
 						Salvar
 					</Typography>
@@ -43,7 +48,12 @@ export const FerramentasDeDetalhe = ({
 			)}
 			{mostarBotaoSalvarCarregando && <Skeleton width={110} height={60} />}
 			{mostrarBotaoSalvarEVoltar && !mostrarBotaoSalvarEVoltarCarregando && !smDown && !mdDown && (
-				<Button color="primary" variant="outlined" startIcon={<Icon>save</Icon>} disableElevation>
+				<Button
+					color="primary"
+					variant="outlined"
+					startIcon={<Icon>save</Icon>}
+					onClick={aoClicarEmSalvarEVoltar}
+					disableElevation>
 					<Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
 						Salvar e voltar
 					</Typography>
@@ -51,7 +61,12 @@ export const FerramentasDeDetalhe = ({
 			)}
 			{mostrarBotaoSalvarEVoltarCarregando && !smDown && !mdDown && <Skeleton width={170} height={60} />}
 			{mostrarBotaoApagar && !mostrarBotaoApagarCarregando && (
-				<Button color="primary" variant="outlined" startIcon={<Icon>delete</Icon>} disableElevation>
+				<Button
+					color="primary"
+					variant="outlined"
+					startIcon={<Icon>delete</Icon>}
+					onClick={aoClicarEmApagar}
+					disableElevation>
 					<Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
 						Apagar
 					</Typography>
@@ -59,7 +74,12 @@ export const FerramentasDeDetalhe = ({
 			)}
 			{mostrarBotaoApagarCarregando && <Skeleton width={110} height={60} />}
 			{mostrarBotaoNovo && !mostrarBotaoNovoCarregando && !smDown && (
-				<Button color="primary" variant="outlined" startIcon={<Icon>add</Icon>} disableElevation>
+				<Button
+					color="primary"
+					variant="outlined"
+					startIcon={<Icon>add</Icon>}
+					onClick={aoClicarEmNovo}
+					disableElevation>
 					<Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
 						{textoBotaoNovo}
 					</Typography>
@@ -72,7 +92,12 @@ export const FerramentasDeDetalhe = ({
 				)}
 
 			{mostrarBotaoVoltar && !mostrarBotaoVoltarCarregando && (
-				<Button color="primary" variant="outlined" startIcon={<Icon>arrow_back</Icon>} disableElevation>
+				<Button
+					color="primary"
+					variant="outlined"
+					startIcon={<Icon>arrow_back</Icon>}
+					onClick={aoClicarEmVoltar}
+					disableElevation>
 					<Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
 						voltar
 					</Typography>
