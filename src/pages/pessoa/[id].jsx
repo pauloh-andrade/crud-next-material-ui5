@@ -1,13 +1,16 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { FerramentasDeDetalhe } from '../../componnents';
+import { useEffect, useRef, useState } from 'react';
 import { PessoaService } from '../../services/api/pessoas/PessoasService';
+import { FerramentasDeDetalhe } from '../../componnents';
 import LayoutBase from '../../layout/LayoutBase';
-import { LinearProgress } from '@mui/material';
+import { VTextField } from '../../forms';
+import { Form } from '@unform/web';
 
 const DetalheDePessoas = () => {
 	const router = useRouter();
 	const id = router.query.id;
+
+	const formRef = useRef(null);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [nome, setNome] = useState(false);
@@ -28,8 +31,8 @@ const DetalheDePessoas = () => {
 		}
 	}, [id]);
 
-	const handleSave = () => {
-		console.log('save');
+	const handleSave = data => {
+		console.log(data);
 	};
 
 	const handleDelete = id => {
@@ -54,14 +57,19 @@ const DetalheDePessoas = () => {
 					mostrarBotaoSalvarEFechar
 					mostrarBotaoNovo={router.query.id !== 'nova'}
 					mostrarBotaoApagar={router.query.id !== 'nova'}
-					aoClicarEmSalvar={() => handleSave()}
-					aoClicarEmSalvarEVoltar={() => handleSave()}
+					aoClicarEmSalvar={() => formRef.current?.submitForm()}
+					aoClicarEmSalvarEVoltar={() => formRef.current?.submitForm()}
 					aoClicarEmApagar={() => handleDelete(Number(id))}
 					aoClicarEmNovo={() => router.push('/pessoa/nova')}
 					aoClicarEmVoltar={() => router.push('/pessoa')}
 				/>
 			}>
-			{isLoading && <LinearProgress variant="indeterminate" />}
+			<Form ref={formRef} onSubmit={datas => handleSave(datas)}>
+				<VTextField name="nomeCompleto" />
+				<VTextField name="email" />
+				<VTextField name="cidadeId" />
+				<button type="submit">Subimit</button>
+			</Form>
 		</LayoutBase>
 	);
 };

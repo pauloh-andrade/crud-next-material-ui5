@@ -21,7 +21,7 @@ const LayoutBase = ({ children, titulo, barraDeFerramentas }) => {
 			},
 			{
 				icon: 'people',
-				path: '/pessoas',
+				path: '/pessoa',
 				label: 'Pessoas',
 			},
 		]);
