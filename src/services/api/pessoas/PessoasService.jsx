@@ -32,9 +32,38 @@ const getById = async id => {
 		return new Error(error.message || 'Erro ao consultar o registro.');
 	}
 };
-const create = async () => {};
-const updateById = async () => {};
-const deleteById = async () => {};
+const create = async dados => {
+	try {
+		const { data } = await Api.post('/pessoas', dados);
+
+		if (data) {
+			return data.id;
+		}
+
+		return new Error('Erro ao criar o registro.');
+	} catch (error) {
+		console.error(error);
+		return new Error(error.message || 'Erro ao criar o registro.');
+	}
+};
+
+const updateById = async (id, dados) => {
+	try {
+		await Api.put(`/pessoas/${id}`, dados);
+	} catch (error) {
+		console.error(error);
+		return new Error(error.message || 'Erro ao atualizar o registro.');
+	}
+};
+
+const deleteById = async id => {
+	try {
+		await Api.delete(`/pessoas/${id}`);
+	} catch (error) {
+		console.error(error);
+		return new Error(error.message || 'Erro ao apagar o registro.');
+	}
+};
 
 export const PessoaService = {
 	getAll,

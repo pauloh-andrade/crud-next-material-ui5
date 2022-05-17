@@ -21,9 +21,15 @@ const VTextField = ({ name, ...rest }) => {
 			error={!!error}
 			helperText={error}
 			defaultValue={defaultValue}
-			onKeyDown={() => (error ? clearError() : undefined)}
+			onKeyDown={() => {
+				error && clearError();
+				rest.onKeyDown?.(e);
+			}}
 			value={value}
-			onChange={e => setValue(e.target.value)}></TextField>
+			onChange={e => {
+				setValue(e.target.value);
+				rest.onChange?.(e);
+			}}></TextField>
 	);
 };
 
