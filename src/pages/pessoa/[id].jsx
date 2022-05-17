@@ -59,6 +59,10 @@ const DetalheDePessoas = () => {
 				setIsLoading(false);
 				if (result instanceof Error) {
 					alert(result.message);
+				} else {
+					if (isSaveAndClose) {
+						router.push(`/pessoa`);
+					}
 				}
 			});
 		}
