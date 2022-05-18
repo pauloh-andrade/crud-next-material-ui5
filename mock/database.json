@@ -1,9 +1,9 @@
 {
   "pessoas": [
     {
-      "cidadeId": 12,
-      "email": "pauloh8755@gmail.com",
       "nomeCompleto": "1223132",
+      "email": "pauloh8755@gmail.com",
+      "cidadeId": 12,
       "id": 1
     },
     {

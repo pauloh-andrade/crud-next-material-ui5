@@ -1,5 +1,6 @@
 import { MenuLateral } from '../componnents';
 import { AppThemeProvider, DrawerProvider } from '../contexts';
+import '../forms/TraducoesYup';
 import './globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
