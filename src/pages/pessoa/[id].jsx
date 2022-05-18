@@ -1,10 +1,18 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Grid, Paper, Box, Typography, LinearProgress } from '@mui/material';
+import * as yup from 'yup';
+
 import { PessoaService } from '../../services/api/pessoas/PessoasService';
 import { FerramentasDeDetalhe } from '../../componnents';
 import LayoutBase from '../../layout/LayoutBase';
 import { VTextField, VForm, useVForm } from '../../forms';
-import { Grid, Paper, Box, Typography, LinearProgress } from '@mui/material';
+
+const formValidationSchema = yup.object().shape({
+	nomeCompleto: yup.string().required().min(5),
+	email: yup.string().required().email(5),
+	cidadeId: yup.number().required(),
+});
 
 const DetalheDePessoas = () => {
 	const router = useRouter();
@@ -40,32 +48,45 @@ const DetalheDePessoas = () => {
 	}, [id]);
 
 	const handleSave = data => {
-		setIsLoading(true);
-		if (id === 'nova') {
-			PessoaService.create(data).then(result => {
-				setIsLoading(false);
-				if (result instanceof Error) {
-					alert(result.message);
+		//abortEarly: true -> para a validação no primeiro erro
+		formValidationSchema
+			.validate(data, { abortEarly: false })
+			.then(validatedData => {
+				setIsLoading(true);
+				if (id === 'nova') {
+					PessoaService.create(validatedData).then(result => {
+						setIsLoading(false);
+						if (result instanceof Error) {
+							alert(result.message);
+						} else {
+							if (isSaveAndClose()) {
+								router.push(`/pessoa`);
+							} else {
+								router.push(`/pessoa/${result}`);
+							}
+						}
+					});
 				} else {
-					if (isSaveAndClose) {
-						router.push(`/pessoa`);
-					} else {
-						router.push(`/pessoa/${result}`);
-					}
+					PessoaService.updateById(id, validatedData).then(result => {
+						setIsLoading(false);
+						if (result instanceof Error) {
+							alert(result.message);
+						} else {
+							if (isSaveAndClose()) {
+								router.push(`/pessoa`);
+							}
+						}
+					});
 				}
+			})
+			.catch(errors => {
+				const validationErrors = {};
+				errors.inner.forEach(error => {
+					if (!error.path) return;
+					validationErrors[error.path] = error.message;
+				});
+				formRef.current?.setErrors(validationErrors);
 			});
-		} else {
-			PessoaService.updateById(id, data).then(result => {
-				setIsLoading(false);
-				if (result instanceof Error) {
-					alert(result.message);
-				} else {
-					if (isSaveAndClose) {
-						router.push(`/pessoa`);
-					}
-				}
-			});
-		}
 	};
 
 	const handleDelete = id => {
@@ -91,10 +112,10 @@ const DetalheDePessoas = () => {
 					mostrarBotaoNovo={router.query.id !== 'nova'}
 					mostrarBotaoApagar={router.query.id !== 'nova'}
 					aoClicarEmSalvar={save}
-					aoClicarEmSalvarEVoltar={() => formRef.current?.submitForm()}
+					aoClicarEmSalvarEVoltar={saveAndClose}
 					aoClicarEmApagar={() => handleDelete(Number(id))}
 					aoClicarEmNovo={() => router.push('/pessoa/nova')}
-					aoClicarEmVoltar={saveAndClose}
+					aoClicarEmVoltar={() => router.push('/pessoa')}
 				/>
 			}>
 			<VForm ref={formRef} onSubmit={datas => handleSave(datas)}>

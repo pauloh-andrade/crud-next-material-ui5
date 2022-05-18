@@ -83,7 +83,7 @@ const ListagemDePessoas = () => {
 					textoBotaoNovo="nova"
 					mostrarBotaoSalvarEVoltar
 					aoMudarTextoDeBusca={texto => definirParametros(texto)}
-					aoClicarEmNovo={() => router.push('pessoas/detalhe/nova')}
+					aoClicarEmNovo={() => router.push('pessoa/nova')}
 				/>
 			}>
 			<TableContainer component={Paper} variant="outlined" sx={{ m: 1, width: 'auto' }}>
