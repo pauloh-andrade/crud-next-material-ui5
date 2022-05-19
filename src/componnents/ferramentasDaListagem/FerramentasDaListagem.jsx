@@ -22,6 +22,7 @@ export const FerramentasDaListagem = ({
 			paddingX={2}
 			display="flex"
 			alignItems="center"
+			variant="outlined"
 			component={Paper}>
 			{mostrarInputBusca && (
 				<TextField

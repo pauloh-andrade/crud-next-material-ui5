@@ -1,12 +1,6 @@
 {
   "pessoas": [
     {
-      "nomeCompleto": "1223132",
-      "email": "pauloh8755@gmail.com",
-      "cidadeId": 12,
-      "id": 1
-    },
-    {
       "id": 2,
       "nome": "Paulo",
       "nomeCompleto": "Lucas Henrique",
@@ -115,66 +109,26 @@
       "email": "pauloh8755@gmail.com"
     },
     {
-      "nomeCompleto": "yuri",
-      "email": "dasdas",
-      "cidadeId": "adasdas",
-      "id": 26
-    },
-    {
-      "nomeCompleto": "yuri",
-      "email": "dasdas",
-      "cidadeId": "12",
-      "id": 27
-    },
-    {
-      "nomeCompleto": "yuri",
-      "email": "dasdas",
-      "cidadeId": "12",
-      "id": 28
-    },
-    {
       "29": "",
       "id": 30
     },
     {
       "29": "",
       "id": 31
+    }
+  ],
+  "cidades": [
+    {
+      "nome": "porto alegre",
+      "id": 1
     },
     {
-      "nomeCompleto": "Paulo Roberto",
-      "email": "Paulo@gmail.com",
-      "cidadeId": "12",
-      "id": 32
+      "nome": "Carapicuiba",
+      "id": 2
     },
     {
-      "nomeCompleto": "Lucas Henrique",
-      "email": "Lucas@gmail.com",
-      "cidadeId": "12",
-      "id": 33
-    },
-    {
-      "nomeCompleto": "Joazinho",
-      "email": "@email",
-      "cidadeId": "12",
-      "id": 34
-    },
-    {
-      "nomeCompleto": "dasas",
-      "email": "dasdas",
-      "cidadeId": "213",
-      "id": 35
-    },
-    {
-      "nomeCompleto": "dasdas",
-      "email": "dasdasdsa",
-      "cidadeId": "dasdasdasd",
-      "id": 36
-    },
-    {
-      "nomeCompleto": "João miguel",
-      "email": "@email",
-      "cidadeId": "1",
-      "id": 37
+      "nome": "Manaus",
+      "id": 3
     }
   ]
 }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { PessoaService } from '../../services/api/pessoas/PessoasService';
+import { CidadeService } from '../../services/api/cidades/CidadesService';
 import { FerramentasDaListagem } from '../../componnents';
 import LayoutBase from '../../layout/LayoutBase';
 import { Environment } from '../../environment';
@@ -21,7 +21,7 @@ import {
 	TableRow,
 } from '@mui/material';
 
-const ListagemDePessoas = () => {
+const ListagemDeCidades = () => {
 	const router = useRouter();
 	const { debounce } = UseDebounce();
 
@@ -30,7 +30,7 @@ const ListagemDePessoas = () => {
 	const [isLoading, setIsLoading] = useState([]);
 
 	const definirParametros = texto => {
-		router.replace({ pathname: '/pessoa', query: texto }, undefined, {
+		router.replace({ pathname: '/Cidade', query: texto }, undefined, {
 			shallow: true,
 		});
 	};
@@ -45,7 +45,7 @@ const ListagemDePessoas = () => {
 	useEffect(() => {
 		setIsLoading(true);
 		debounce(() => {
-			PessoaService.getAll(pagina, router.query.busca).then(result => {
+			CidadeService.getAll(pagina, router.query.busca).then(result => {
 				setIsLoading(false);
 				if (result instanceof Error) {
 					alert(result.message);
@@ -60,7 +60,7 @@ const ListagemDePessoas = () => {
 
 	const handleClickDelete = id => {
 		if (confirm('Tem certeza que deseja apagar?')) {
-			PessoaService.deleteById(id).then(result => {
+			CidadeService.deleteById(id).then(result => {
 				if (result instanceof Error) {
 					alert(result.message);
 				} else {
@@ -75,7 +75,7 @@ const ListagemDePessoas = () => {
 
 	return (
 		<LayoutBase
-			titulo="Controle de pessoas"
+			titulo="Controle de cidades"
 			barraDeFerramentas={
 				<FerramentasDaListagem
 					mostrarInputBusca
@@ -83,7 +83,7 @@ const ListagemDePessoas = () => {
 					textoBotaoNovo="nova"
 					mostrarBotaoSalvarEVoltar
 					aoMudarTextoDeBusca={texto => definirParametros(texto)}
-					aoClicarEmNovo={() => router.push('pessoa/nova')}
+					aoClicarEmNovo={() => router.push('cidade/nova')}
 				/>
 			}>
 			<TableContainer component={Paper} variant="outlined" sx={{ m: 1, width: 'auto' }}>
@@ -92,7 +92,6 @@ const ListagemDePessoas = () => {
 						<TableRow>
 							<TableCell>Ações</TableCell>
 							<TableCell>Nome Completo</TableCell>
-							<TableCell>E-mail</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -102,12 +101,11 @@ const ListagemDePessoas = () => {
 									<IconButton size="small" onClick={() => handleClickDelete(row.id)}>
 										<Icon>delete</Icon>
 									</IconButton>
-									<IconButton size="small" onClick={() => router.push({ pathname: `/pessoa/${row.id}` })}>
+									<IconButton size="small" onClick={() => router.push({ pathname: `/Cidade/${row.id}` })}>
 										<Icon>edit</Icon>
 									</IconButton>
 								</TableCell>
-								<TableCell>{row.nomeCompleto}</TableCell>
-								<TableCell>{row.email}</TableCell>
+								<TableCell>{row.nome}</TableCell>
 							</TableRow>
 						))}
 					</TableBody>
@@ -142,4 +140,4 @@ const ListagemDePessoas = () => {
 	);
 };
 
-export default ListagemDePessoas;
+export default ListagemDeCidades;

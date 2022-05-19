@@ -24,6 +24,11 @@ const LayoutBase = ({ children, titulo, barraDeFerramentas }) => {
 				path: '/pessoa',
 				label: 'Pessoas',
 			},
+			{
+				icon: 'apartment',
+				path: '/cidade',
+				label: 'Cidades',
+			},
 		]);
 	}, []);
 
