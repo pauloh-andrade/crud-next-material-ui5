@@ -1,12 +1,6 @@
 {
   "pessoas": [
     {
-      "id": 2,
-      "nome": "Paulo",
-      "nomeCompleto": "Lucas Henrique",
-      "email": "pauloh8755@gmail.com"
-    },
-    {
       "id": 3,
       "nome": "Paulo",
       "nomeCompleto": "Pedro Henrique",

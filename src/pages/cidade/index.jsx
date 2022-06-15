@@ -30,7 +30,7 @@ const ListagemDeCidades = () => {
 	const [isLoading, setIsLoading] = useState([]);
 
 	const definirParametros = texto => {
-		router.replace({ pathname: '/Cidade', query: texto }, undefined, {
+		router.replace({ pathname: '/cidade', query: texto }, undefined, {
 			shallow: true,
 		});
 	};
