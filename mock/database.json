@@ -123,6 +123,30 @@
     {
       "nome": "Manaus",
       "id": 3
+    },
+    {
+      "nome": "Chapucaia",
+      "id": 4
+    },
+    {
+      "nome": "Ferrovianópolis",
+      "id": 5
+    },
+    {
+      "nome": "Jardins do Marques",
+      "id": 6
+    },
+    {
+      "nome": "Capão redondo",
+      "id": 7
+    },
+    {
+      "nome": "Barueri",
+      "id": 8
+    },
+    {
+      "nome": "Jandira",
+      "id": 9
     }
   ]
 }

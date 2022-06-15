@@ -7,6 +7,7 @@ import { PessoaService } from '../../services/api/pessoas/PessoasService';
 import { FerramentasDeDetalhe } from '../../componnents';
 import LayoutBase from '../../layout/LayoutBase';
 import { VTextField, VForm, useVForm } from '../../forms';
+import { AutoCompleteCidade } from './components/AutoCompleteCidade';
 
 const formValidationSchema = yup.object().shape({
 	nomeCompleto: yup.string().required().min(5),
@@ -150,7 +151,7 @@ const DetalheDePessoas = () => {
 						</Grid>
 						<Grid container item direction="row">
 							<Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-								<VTextField fullWidth name="cidadeId" label="ID Cidade" placeholder="Cidade id" disabled={isLoading} />
+								<AutoCompleteCidade />
 							</Grid>
 						</Grid>
 					</Grid>

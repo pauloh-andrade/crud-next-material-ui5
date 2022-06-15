@@ -101,7 +101,7 @@ const ListagemDeCidades = () => {
 									<IconButton size="small" onClick={() => handleClickDelete(row.id)}>
 										<Icon>delete</Icon>
 									</IconButton>
-									<IconButton size="small" onClick={() => router.push({ pathname: `/Cidade/${row.id}` })}>
+									<IconButton size="small" onClick={() => router.push({ pathname: `/cidade/${row.id}` })}>
 										<Icon>edit</Icon>
 									</IconButton>
 								</TableCell>
