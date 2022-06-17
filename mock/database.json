@@ -1,36 +1,6 @@
 {
   "pessoas": [
     {
-      "id": 3,
-      "nome": "Paulo",
-      "nomeCompleto": "Pedro Henrique",
-      "email": "pauloh8755@gmail.com"
-    },
-    {
-      "id": 5,
-      "nome": "Jão",
-      "nomeCompleto": "João Henrique",
-      "email": "pauloh8755@gmail.com"
-    },
-    {
-      "id": 6,
-      "nome": "Paulo",
-      "nomeCompleto": "Paulo Henrique",
-      "email": "pauloh8755@gmail.com"
-    },
-    {
-      "id": 7,
-      "nome": "Paulo",
-      "nomeCompleto": "Lucas Henrique",
-      "email": "pauloh8755@gmail.com"
-    },
-    {
-      "id": 8,
-      "nome": "Paulo",
-      "nomeCompleto": "Pedro Henrique",
-      "email": "pauloh8755@gmail.com"
-    },
-    {
       "id": 10,
       "nome": "Jão",
       "nomeCompleto": "João Henrique",
