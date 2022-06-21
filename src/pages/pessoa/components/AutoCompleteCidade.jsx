@@ -3,17 +3,24 @@ import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { UseDebounce } from '../../../hooks';
 import { useMemo } from 'react';
+import { useField } from '@unform/core';
 
 const AutoCompleteCidade = ({ isExternalLoading = false }) => {
+	const { fieldName, registerField, defaultValue, error, clearError } = useField('cidadeId');
+
 	const { debounce } = UseDebounce();
 	const [options, setOptions] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [busca, setBusca] = useState('');
-	const [selectedId, setSelectedId] = useState(undefined);
+	const [selectedId, setSelectedId] = useState(defaultValue);
 
 	useEffect(() => {
-		console.log(isExternalLoading);
-	}, [isExternalLoading]);
+		registerField({
+			name: fieldName,
+			getValue: () => selectedId,
+			setValue: (_, newSelectedId) => setSelectedId(newSelectedId),
+		});
+	}, [registerField, fieldName, selectedId]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -30,8 +37,11 @@ const AutoCompleteCidade = ({ isExternalLoading = false }) => {
 	}, [busca]);
 
 	const autoCompleteSelectedOption = useMemo(() => {
-		if (!selectedId) return undefined;
+		if (!selectedId) return null;
+
 		const selectedOption = options.find(option => option.id === selectedId);
+		if (!selectedOption) return null;
+
 		return selectedOption;
 	}, [selectedId, options]);
 
@@ -41,13 +51,19 @@ const AutoCompleteCidade = ({ isExternalLoading = false }) => {
 			onChange={(_, newValue) => {
 				setSelectedId(newValue?.id);
 				setBusca('');
+				clearError();
 			}}
 			options={options}
 			loading={isLoading}
 			disabled={isExternalLoading}
+			disablePortal
+			openText="Abrir"
+			closeText="Fechar"
+			noOptionsText="Nenhuma opção encontrada"
+			loadingText="...carregando"
 			onInputChange={(_, newValue) => setBusca(newValue)}
-			renderInput={params => <TextField {...params} label="Cidade" />}
-			popupIcon={isLoading ? <CircularProgress size={28} /> : undefined}
+			renderInput={params => <TextField {...params} error={!!error} helperText={error} label="Cidade" />}
+			popupIcon={isLoading || isExternalLoading ? <CircularProgress size={28} /> : undefined}
 		/>
 	);
 };

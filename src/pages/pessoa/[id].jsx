@@ -43,13 +43,14 @@ const DetalheDePessoas = () => {
 			formRef.current?.setData({
 				nomeCompleto: '',
 				email: '',
-				cidadeId: '',
+				cidadeId: undefined,
 			});
 		}
 	}, [id]);
 
 	const handleSave = data => {
 		//abortEarly: true -> para a validação no primeiro erro
+		console.log(data);
 		formValidationSchema
 			.validate(data, { abortEarly: false })
 			.then(validatedData => {
